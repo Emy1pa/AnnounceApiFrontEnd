@@ -19,7 +19,9 @@ export default function Register() {
                     "Accept": "application/json"
                 }
             });
-            console.log(response.data); // Optionally, handle the response data
+            localStorage.setItem("user-info", JSON.stringify(response.data));
+            localStorage.setItem("user-role", role);
+
             setName("");
             setEmail("");
             setPassword("");
