@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-export default function Header() {
+export default function AnnounceListHeader() {
   let user = JSON.parse(localStorage.getItem('user-info'));
   const userRole = localStorage.getItem("user-role");
   const location = useLocation();
   const navigate = useNavigate();
 
   function logOut() {
-    localStorage.removeItem('token'); 
-    navigate('/login'); 
+    localStorage.removeItem('token');
+    navigate('/login');
   }
 
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function Header() {
   };
 
   return (
-    <> 
+    <>
       <nav className="flex items-center justify-between px-4 py-4 bg-white shadow-md">
         <Link to="/" className="text-xl font-semibold text-gray-800">
           YouCare Platform
@@ -51,8 +51,8 @@ export default function Header() {
               </Link>
             </>
           )}
-          
-          {/* Dropdown Menu */}
+
+          {/* Profile and Dropdown Menu */}
           { (userRole === "organizer" || userRole === "volunteer") && isOrganizerOrVolunteer() ?
             <div className="relative">
               <button className="ml-6 py-2 px-4 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200" onClick={toggleDropdown}>
@@ -60,6 +60,34 @@ export default function Header() {
               </button>
               {isOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-md z-10">
+                  {/* Add navigation links for adding and updating announcements */}
+                  { userRole === "organizer" &&
+                    <>
+                      <Link
+                        to="/organizer"
+                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-gray-900"
+                        onClick={closeDropdown}
+                      >
+                        Add Announce
+                      </Link>
+                      <Link
+                        to="/update-announcement"
+                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-gray-900"
+                        onClick={closeDropdown}
+                        style={{ whiteSpace: 'nowrap' }}
+                      >
+                        Update Announce
+                      </Link>
+                      <Link
+                        to="/announceList"
+                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-gray-900"
+                        onClick={closeDropdown}
+                        style={{ whiteSpace: 'nowrap' }}
+                      >
+                        Announce List
+                      </Link>
+                    </>
+                  }
                   <Link
                     to="/logout"
                     onClick={() => { logOut(); closeDropdown(); }}

@@ -6,6 +6,7 @@ import Login from './Login';
 import Register from './Register';
 import Organizer from './Organizer'; 
 import Volunteer from './Volunteer'; 
+import AnnounceList from './AnnounceList'; 
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/organizer" element={<Organizer />} />
         <Route path="/volunteer" element={<Volunteer />} />
+        <Route path="/announceList" element={<AnnounceList />} />
       </Routes>
     </div>
   );
